@@ -3,11 +3,11 @@
 #=================================================
 #	System Required: RedHat/CentOS/Fedora
 #	Description: ArchiSteamFarm一键挂卡
-#	Version: 0.0.1 (Pre-release)
+#	Version: 0.0.2 (Pre-release)
 #	Author: 血小板が可爱い
 #=================================================
 
-sh_ver="0.0.1"
+sh_ver="0.0.2"
 
 red='\e[91m'
 green='\e[92m'
@@ -117,10 +117,13 @@ runArchiSteamFarm(){
 	echo -e "23.50.18.229 steamcommunity.com" >> /etc/hosts 
 	echo && echo -e "
 	————————————————————————
-	开启ASF挂卡方法      命令
-	新建一个screen       ${green}sudo screen -S ASF${none}
-	运行ArchiSteamFarm   ${green}./root/ASF/ArchiSteamFarm ${none}
+	开启ASF挂卡方法命令(先记下来之后再退出脚本)
 	按${red}[ Ctrl + C ]${none}退出脚本
+	${green}sudo screen -S ASF        ${none}
+	${green}cd /root/ASF/             ${none}
+	${green}chmod 777 ArchiSteamFarm  ${none}
+	${green}./ArchiSteamFarm          ${none}
+	
 	————————————————————————" && echo 
 	sleep 60s
 }
