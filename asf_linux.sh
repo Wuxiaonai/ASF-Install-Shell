@@ -3,11 +3,11 @@
 #=================================================
 #	System Required: RedHat/CentOS/Fedora
 #	Description: ArchiSteamFarm一键挂卡
-#	Version: 0.0.2 (Pre-release)
+#	Version: 0.0.1 
 #	Author: 血小板が可爱い
 #=================================================
 
-sh_ver="0.0.2"
+sh_ver="0.0.1"
 
 red='\e[91m'
 green='\e[92m'
@@ -159,7 +159,7 @@ clear
 while :; do
 	echo && echo -e "  
 	---- 血小板が可爱い | ArchiSteamFarm一键云挂卡----
-	${red}[v${sh_ver}](Pre-release)${none}
+	${red}[v${sh_ver}]${none}
 	————————————————————————
 
 	${green} 0.${none} 配置 ArchiSteamFarm 运行所需的环境

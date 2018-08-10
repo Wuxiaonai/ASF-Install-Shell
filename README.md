@@ -24,14 +24,19 @@ Bug，请多多包涵。如果在使用中有任何问题，欢迎反馈给我�
 
 下载脚本
 -------  
-
 ```javascript
- wget https://github.com/ChenxuanZhao/ASF-Install-Shell/releases/download/0.0.1/asf_linux.sh
+ wget https://github.com/ChenxuanZhao/ASF-Install-Shell/releases/download/v0.0.1/asf_linux.sh -O asf_linux.sh
 ```
+
 运行脚本
 -------  
-
 ```javascript
   sudo su
   bash asf_linux.sh
+```
+
+使用方法（SteamCN）
+-------  
+```javascript
+  https://steamcn.com/forum.php?mod=viewthread&tid=413908&page=1&extra=#pid7227298
 ```
