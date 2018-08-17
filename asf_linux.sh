@@ -3,11 +3,11 @@
 #=================================================
 #	System Required: RedHat/CentOS/Fedora
 #	Description: ArchiSteamFarm一键挂卡
-#	Version: 0.0.1 
+#	Version: 0.0.2 
 #	Author: 血小板が可爱い
 #=================================================
 
-sh_ver="0.0.1"
+sh_ver="0.0.2"
 
 red='\e[91m'
 green='\e[92m'
@@ -61,19 +61,18 @@ nameserver 1.0.0.1" > /etc/resolv.conf
 	echo "正在运行系统更新"
 	yum -y update && yum -y upgrade
 
-	#校准服务器时间
-	echo "正在校准服务器时间"
-	yum -y install ntp ntpdate
-	ntpdate ntp1.aliyun.com
-
 	#安装软件
 	echo "正在安装所需软件"
-	yum -y install unzip zip vim gcc yum-utils screen
 	rpm --import http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 	yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/
-	yum -y install mono-complete
+	yum -y install mono-complete icu unzip zip vim gcc yum-utils screen ntp ntpdate
+	
+	#校准服务器时间
+	echo "正在校准服务器时间"
+	ntpdate ntp1.aliyun.com
 	
 	#清理安装缓存
+	echo "正在清理安装缓存"
 	yum -y clean all
 	
 	echo "安装完成！"
@@ -83,7 +82,7 @@ installArchiSteamFarm(){
 	#安装 ArchiSteamFarm
 	cd /root
 	echo "正在下载ArchiSteamFarm，请耐心等待。。。。。。"
-	wget https://github.com/JustArchi/ArchiSteamFarm/releases/download/3.2.0.5/ASF-linux-x64.zip -O ASF-linux-x64.zip
+	wget https://github.com/JustArchi/ArchiSteamFarm/releases/download/3.3.0.3/ASF-linux-x64.zip -O ASF-linux-x64.zip
 	echo "正在解压ArchiSteamFarm，请耐心等待。。。。。。"
 	unzip ASF-linux-x64.zip -d ASF/
 	rm -f /root/ASF-linux-x64.zip
