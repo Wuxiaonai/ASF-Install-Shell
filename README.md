@@ -15,10 +15,10 @@ ASF-Install-Shell有哪些功能？
     *  清理缓存
 * 安装ArchiSteamFarm
 * 配置ArchiSteamFarm
-- [x] 基本配置
-- [ ] 交易
-- [ ] 访问
-- [ ] 挂卡（高级设置）
+    - [x] 基本配置
+    - [ ] 交易
+    - [ ] 访问
+    - [ ] 挂卡（高级设置）
 * 卸载ArchiSteamFarm
 
 反馈和建议
