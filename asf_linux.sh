@@ -52,13 +52,14 @@ checkSystem(){
 installArchiSteamFarmInit(){
     #设置DNS
 	echo "正在设置DNS"
-	echo "nameserver 223.5.5.5
-nameserver 223.6.6.6
-nameserver 1.1.1.1
-nameserver 1.0.0.1" > /etc/resolv.conf
+	echo -e "nameserver 223.5.5.5" > /etc/resolv.conf
+	echo -e "nameserver 223.6.6.6" >> /etc/resolv.conf
+	echo -e "nameserver 1.1.1.1" >> /etc/resolv.conf
+	echo -e "nameserver 1.0.0.1" >> /etc/resolv.conf
 	
 	#系统更新
 	echo "正在运行系统更新"
+	rm -f /var/run/yum.pid
 	yum -y update && yum -y upgrade
 
 	#安装软件
@@ -107,17 +108,17 @@ configArchiSteamFarm(){
 		cd /root/ASF/config
 		touch Account1.json
 		echo -e "{
-		  "\"SteamLogin\"": "\"$SteamID\"",
-		  "\"SteamPassword\"": "\"$Passord\"",
-		  "\"Enabled\"": true,
-		  "\"IsBotAccount\"": false,
-		  "\"FarmOffline\"": true
-		}" > /root/ASF/config/Account1.json
+	"\"SteamLogin\"": "\"$SteamID\"",
+	"\"SteamPassword\"": "\"$Passord\"",
+	"\"Enabled\"": true,
+	"\"IsBotAccount\"": false,
+	"\"FarmOffline\"": true
+}" > /root/ASF/config/Account1.json
 		
 		#加入Steamcommunity的IP
 		chmod 777 /etc/hosts
-		echo -e "184.26.216.215 store.steampowered.com
-		184.26.216.215 steamcommunity.com" > /etc/hosts
+		echo -e "104.89.157.113 store.steampowered.com" > /etc/hosts
+		echo -e "104.89.157.113 steamcommunity.com" >> /etc/hosts
 		echo "挂卡账户配置成功！"
 	fi 
 } 
@@ -130,13 +131,13 @@ runArchiSteamFarm(){
 			echo "请先配置ArchiSteamFarm挂卡账户，再运行ArchiSteamFarm！"
 		else 
 			echo && echo -e "
-	————————————————————————
-	开启ASF挂卡方法命令(先记下来之后再退出脚本)
-	按${red}[ Ctrl + C ]${none}退出脚本
-	${green}sudo screen -S ASF        ${none}
-	${green}cd /root/ASF/             ${none}
-	${green}./ArchiSteamFarm          ${none}
-	————————————————————————" && echo 
+————————————————————————
+开启ASF挂卡方法命令(先记下来之后再退出脚本)
+按${red}[ Ctrl + C ]${none}退出脚本
+${green}sudo screen -S ASF        ${none}
+${green}cd /root/ASF/             ${none}
+${green}./ArchiSteamFarm          ${none}
+————————————————————————" && echo 
 			sleep 60s
 		fi
 	fi
@@ -157,19 +158,19 @@ cd /root
 clear
 while :; do
 	echo && echo -e "  
-	---- 血小板が可爱い | ArchiSteamFarm一键云挂卡----
-	${red}[v${sh_ver}]${none}
-	————————————————————————
+---- 血小板が可爱い | ArchiSteamFarm一键云挂卡----
+${red}[v${sh_ver}]${none}
+————————————————————————
 
-	${green} 0.${none} 配置 ArchiSteamFarm 运行所需的环境
-	${green} 1.${none} 安装 ArchiSteamFarm
-	${green} 2.${none} 配置 ArchiSteamFarm 挂卡账户
-	${green} 3.${none} 运行 ArchiSteamFarm 方法
-	${green} 4.${none} 卸载 ArchiSteamFarm 
+${green} 0.${none} 配置 ArchiSteamFarm 运行所需的环境
+${green} 1.${none} 安装 ArchiSteamFarm
+${green} 2.${none} 配置 ArchiSteamFarm 挂卡账户
+${green} 3.${none} 运行 ArchiSteamFarm 方法
+${green} 4.${none} 卸载 ArchiSteamFarm 
 
-	————————————————————————
-	按${red}[ Ctrl + C ]${none}退出脚本" && echo
-	stty erase '^H' && read -p "	请输入数字 [0-4]:" num
+————————————————————————
+按${red}[ Ctrl + C ]${none}退出脚本" && echo
+	stty erase '^H' && read -p "请输入数字 [0-4]:" num
 	case "$num" in
 		0)
 		installArchiSteamFarmInit
