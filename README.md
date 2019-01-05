@@ -3,7 +3,7 @@ ASF-Install-Shell
 
 ASF-Install-Shell是什么?
 -------  
-一个在Linux服务器上快速安全的部署ArchiSteamFarm挂卡的脚本
+一个在Linux服务器上快速的部署ArchiSteamFarm挂卡的脚本
 
 ASF-Install-Shell有哪些功能？
 -------  
@@ -18,7 +18,7 @@ ASF-Install-Shell有哪些功能？
     - [x] 基本配置
     - [ ] 交易
     - [ ] 访问
-    - [ ] 挂卡（高级设置）
+    - [x] 挂卡（高级设置）
 * 卸载ArchiSteamFarm
 
 反馈和建议
@@ -29,7 +29,7 @@ ASF-Install-Shell有哪些功能？
 下载脚本
 -------  
 ```Shell
-wget https://github.com/Kiyotaka233/ASF-Install-Shell/releases/download/v0.0.4/asf_script.sh -O asf_linux.sh
+wget https://github.com/Kiyotaka233/ASF-Install-Shell/releases/download/v0.0.5/asf_linux.sh -O asf_linux.sh
 ```
 
 运行脚本
