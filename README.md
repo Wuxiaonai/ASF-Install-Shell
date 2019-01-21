@@ -55,6 +55,6 @@ screen -U -S ASF
 Chenxuan – [@Telegram](https://t.me/Chenxuan_Zhao)
 
 ## 许可证  
-
+<img src="License.jpg" align="right" />
 [MIT](https://github.com/Kiyotaka233/ASF-Install-Shell/blob/master/LICENSE) License  
 Copyright (c) 2019 Kiyotaka
