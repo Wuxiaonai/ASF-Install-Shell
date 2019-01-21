@@ -1,4 +1,5 @@
 # Asf_Install_Shell
+
 [![](https://img.shields.io/github/issues/Kiyotaka233/ASF-Install-Shell.svg)](https://github.com/Kiyotaka233/ASF-Install-Shell/issues)
 [![](https://img.shields.io/github/forks/Kiyotaka233/ASF-Install-Shell.svg)](https://github.com/Kiyotaka233/ASF-Install-Shell/network/members)
 [![](https://img.shields.io/github/stars/Kiyotaka233/ASF-Install-Shell.svg)](https://github.com/Kiyotaka233/ASF-Install-Shell/stargazers)
@@ -7,11 +8,15 @@
 
 ![](Logo.png)
 
-## 下载安装  
-### 平台支持  
+## 平台支持  
+
 Asf_Install_Shell在以下平台中可用：  
    * Linux(CentOS 7+)  
+
+## 下载安装  
+
 ### Linux 安装脚本   
+
 使用前需要先安装dialog和screen  
 ```sh
 yum -y install dialog screen
@@ -27,9 +32,10 @@ screen -U -S ASF
 
 ## 使用示例
 
-有关更多示例和用法, 请参阅wiki。
+有关更多示例和用法, 请参阅[wiki](https://github.com/Kiyotaka233/ASF-Install-Shell/wiki)。
 
 ## 更新日志
+
 > 列出了常规版本的功能升级记录，未列出的版本通常为 bug 修复。
 
 * V0.0.5
@@ -40,6 +46,15 @@ screen -U -S ASF
         - [x] 挂卡（高级设置）
 	* 卸载ArchiSteamFarm
 
-## 作者
+## 贡献
+
+请先阅读[参与者公约](https://www.contributor-covenant.org/zh-cn/version/1/4/code-of-conduct)
+
+## 维护
 
 Chenxuan – [@Telegram](https://t.me/Chenxuan_Zhao)
+
+## 许可证  
+
+[MIT](https://github.com/Kiyotaka233/ASF-Install-Shell/blob/master/LICENSE) License  
+Copyright (c) 2019 Kiyotaka
