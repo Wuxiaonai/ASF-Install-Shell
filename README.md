@@ -11,23 +11,45 @@
 ## 平台支持  
 
 Asf_Install_Shell在以下平台中可用：  
-   * Linux(CentOS 7+)  
-
-## 下载安装  
-
-### Linux 安装脚本   
+   * Ubuntu  
+      * Ubuntu 14.04  
+	  * Ubuntu 16.04  
+	  * Ubuntu 18.04  
+   * Debian  
+      * Debian 8  
+	  * Debian 9  
+   * Raspbian  
+      * Raspbian 8
+	  * Raspbian 9
+   * CentOS
+      * CentOS 6
+	  * CentOS 7
+   * Fedora
+      * Fedora 27
+## 下载安装
 
 使用前需要先安装dialog和screen  
+
+### CentOS
+
 ```sh
 yum -y install dialog screen
 ```
 
+### Ubuntu / Debian
+
+```sh
+apt-get -y install dialog screen
+```
+
+### 下载、运行脚本
+
 ```sh
 sudo su 
-wget https://github.com/Kiyotaka233/ASF-Install-Shell/releases/download/v0.0.5/asf_linux.sh -O asf_linux.sh
-chmod 777 asf_linux.sh
+wget https://github.com/Kiyotaka233/ASF-Install-Shell/releases/download/v0.1.0/asf.sh -O asf.sh
+chmod 744 asf.sh
 screen -U -S ASF
-./asf_linux.sh
+./asf.sh
 ```
 
 ## 使用示例
@@ -38,23 +60,29 @@ screen -U -S ASF
 
 > 列出了常规版本的功能升级记录，未列出的版本通常为 bug 修复。
 
+* V0.1.0
+    * 一键部署ArchiSteamFarm所需要的环境
+	* 加入传入参数 (./asf.sh -h)
+	* 支持更多系统
+
 * V0.0.5
     * 一键部署ArchiSteamFarm所需要的环境
 	* 安装ArchiSteamFarm
 	* 配置ArchiSteamFarm
         - [x] 基本配置
-        - [x] 挂卡（高级设置）
-	* 卸载ArchiSteamFarm
+        - [x] 挂卡(高级设置)
+	* 卸载ArchiSteamFarm  
 
 ## 贡献
 
-请先阅读[参与者公约](https://www.contributor-covenant.org/zh-cn/version/1/4/code-of-conduct)
+可以随时新建一个Pull request 或者 issues 写下你的想法^_^
+请先阅读[参与者公约](https://www.contributor-covenant.org/zh-cn/version/1/4/code-of-conduct)  
 
 ## 维护
 
-Chenxuan – [@Telegram](https://t.me/Chenxuan_Zhao)
+Chenxuan – [@Telegram](https://t.me/Chenxuan_Zhao)  
 
-## 许可证  
+## 许可证
 
-[MIT](https://github.com/Kiyotaka233/ASF-Install-Shell/blob/master/LICENSE) License  
-Copyright (c) 2019 Kiyotaka
+[MIT License](https://github.com/Kiyotaka233/ASF-Install-Shell/blob/master/LICENSE)  
+Copyright (c) 2019 Kiyotaka  
