@@ -1,66 +1,154 @@
 #!/bin/bash
 
 #=================================================
-#	System Required: CentOS 7
-#	Description: ArchiSteamFarm一键挂卡脚本(ASF-Install-Shell挂卡脚本)
-#	Version: 0.0.5 
+#	Description: 一个在 Linux 中的自动化安装ArchiSteamFarm的脚本。 
+#	Version: 0.1.0 
 #	Author: Kiyotaka233
-#	Date: 2019/01/06
+#	Date: 2019/01/22
 #=================================================
 
-sh_ver="0.0.5"
+######## 传入参数检测 #########
+case "$1" in
+	-c|--config)
+	CONFIG="1"
+	;;
+	-d|--download)
+	DOWNLOAD="1"
+	;;
+	-e|--edit)
+	EDIT="1"
+	;;
+	-h|--help)
+	HELP="1"
+	;;
+	-s|--start)
+	START="1"
+	;;
+	-u|--uninstall)
+	UNINSTALL="1"
+	;;
+	*)
+	   # 未知参数
+	;;
+esac
+###############################
+
+sh_ver="0.1.0"
 
 ArchiSteamFarmFile="/usr/bin/ArchiSteamFarm/ArchiSteamFarm"
 BotFile="/usr/bin/ArchiSteamFarm/config/Bot.json" 
 
 checkRoot(){
-	[[ $EUID != 0 ]] && \
-	dialog --title "ASF-Install-Shell挂卡脚本" \
-	--msgbox "请使用ROOT账号或使用sudo su命令获取临时的ROOT权限" 10 60 && \
-	exit 1
+	if [[ $EUID != 0 ]]; then
+		dialog --title "ASF-Install-Shell挂卡脚本" \
+		--msgbox "请使用ROOT账号登录或使用sudo su命令获取临时的ROOT权限" 10 60
+		exit 1
+	fi
 }
 
 checkSystem(){
-
-	sys_bit=$(uname -m)
-
-	if [[ $sys_bit == "i386" || $sys_bit == "i686" ]]; then
-		asf_bit="32"
-	elif [[ $sys_bit == "x86_64" ]]; then
-		asf_bit="64"
-	else
+	if [[ $(uname -m) != "x86_64" ]]; then
 		dialog --title "ASF-Install-Shell挂卡脚本" \
-		--msgbox "暂时不支持您的系统。" 10 60 && exit 1
-	fi
-
-	# 检测方法RedHat系
-	if [[ -f /usr/bin/yum && -f /bin/systemctl ]]; then
-		cmd="yum"
-		if [[ -f /bin/systemctl ]]; then
-			systemd=true
-		fi
-	else
-		dialog --title "ASF-Install-Shell挂卡脚本" \
-		--msgbox "暂时不支持您的系统。" 10 60 && exit 1
+		--msgbox "暂时不支持您的系统。" 10 60
+		exit 1
 	fi
 }
 
 initScript(){
-	dialog --title "欢迎使用" --backtitle "ASF-Install-Shell挂卡脚本" --clear --yesno \
-	"
-	是否需要运行挂卡脚本？
-　　　	   ∩∩
-　　	  （´･ω･）
-　	   ＿|　⊃／(＿＿_
-　	 ／ └-(＿＿＿_／
-　	 ￣￣￣￣￣￣￣
-	" 15 60
+	checkRoot
+	checkSystem
+}
+
+chooseSystem(){
+	cat /dev/null > /tmp/asf.sys
+	dialog --title "Kiyotaka233 | ArchiSteamFarm一键云挂卡" \
+	--menu "[v${sh_ver}]    请选择你的系统" 15 60 5 \
+	1 "Ubuntu 18.04" \
+	2 "Ubuntu 16.04" \
+	3 "Ubuntu 14.04" \
+	4 "Debian 9" \
+	5 "Debian 8" \
+	6 "Raspbian 9" \
+	7 "Raspbian 8" \
+	8 "CentOS 7" \
+	9 "CentOS 6" \
+	10 "Fedora 27" 2> /tmp/asf.sys
+	
 	result=$?
-	if [ $result -eq 0 ] ; then
-		checkRoot
-		checkSystem
-	else exit 1
+	if [ $result -eq 1 ] ; then
+		closeScript
+	elif [ $result -eq 255 ]; then
+		closeScript
 	fi
+	
+	case "$(cat /tmp/asf.sys)" in
+		1)
+		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+		echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+		sudo apt update
+		cmd="apt-get"
+		;;
+		2)
+		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+		sudo apt install apt-transport-https
+		echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+		sudo apt update
+		cmd="apt-get"
+		;;
+		3)
+		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+		sudo apt install apt-transport-https
+		echo "deb https://download.mono-project.com/repo/ubuntu stable-trusty main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+		sudo apt update
+		cmd="apt-get"
+		;;
+		4)
+		sudo apt install apt-transport-https dirmngr
+		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+		echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+		sudo apt update
+		cmd="apt-get"
+		;;
+		5)
+		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+		sudo apt install apt-transport-https
+		echo "deb https://download.mono-project.com/repo/debian stable-jessie main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+		sudo apt update
+		cmd="apt-get"
+		;;
+		6)
+		sudo apt install apt-transport-https dirmngr
+		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+		echo "deb https://download.mono-project.com/repo/debian stable-raspbianstretch main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+		sudo apt update
+		cmd="apt-get"
+		;;
+		7)
+		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+		sudo apt install apt-transport-https
+		echo "deb https://download.mono-project.com/repo/debian stable-raspbianjessie main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+		sudo apt update
+		cmd="apt-get"
+		;;
+		8)
+		rpm --import "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
+		su -c 'curl https://download.mono-project.com/repo/centos7-stable.repo | tee /etc/yum.repos.d/mono-centos7-stable.repo'
+		cmd="yum"
+		;;
+		9)
+		rpm --import "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
+		su -c 'curl https://download.mono-project.com/repo/centos6-stable.repo | tee /etc/yum.repos.d/mono-centos6-stable.repo'
+		cmd="yum"
+		;;
+		10)
+		rpm --import "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
+		su -c 'curl https://download.mono-project.com/repo/centos7-stable.repo | tee /etc/yum.repos.d/mono-centos7-stable.repo'
+		dnf update
+		cmd="dnf"
+		;;
+	esac
+
+	rm -f /tmp/asf.sys
 }
 
 installArchiSteamFarmInit(){
@@ -70,24 +158,22 @@ installArchiSteamFarmInit(){
 	echo -e "nameserver 9.9.9.9" >> /etc/resolv.conf
 
 	#系统更新
+	chooseSystem
 	echo "正在运行系统更新"
 	rm -f /var/run/yum.pid
-	yum -y update && yum -y upgrade
+	$cmd -y update && $cmd -y upgrade
 
 	#安装软件
 	echo "正在安装所需软件"
-	rpm --import http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-	yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/
-	yum -y install mono-complete 
-	yum -y install wget
-	yum -y install icu 
-	yum -y install unzip zip 
-	yum -y install vim 
-	yum -y install gcc 
-	yum -y install yum-utils
-	yum -y install screen 
-	yum -y install ntp
-	yum -y install ntpdate
+	$cmd -y install mono-complete wget icu unzip zip vim gcc screen ntp ntpdate
+	if [[ $? -eq 0 ]]; then
+		dialog --title "ASF-Install-Shell挂卡脚本" \
+		--msgbox "软件安装成功！" 10 60
+	else
+		dialog --title "ASF-Install-Shell挂卡脚本" \
+		--msgbox "网络不佳，请稍后再试！" 10 60
+		exit 2;
+	fi
 	
 	#校准服务器时间
 	echo "正在校准服务器时间"
@@ -95,7 +181,7 @@ installArchiSteamFarmInit(){
 	
 	#清理安装缓存
 	echo "正在清理安装缓存"
-	yum -y clean all
+	$cmd -y clean all
 	
 	dialog --title "ASF-Install-Shell挂卡脚本" --msgbox "准备完成！" 10  60
 }
@@ -104,7 +190,7 @@ installArchiSteamFarm(){
 	#安装 ArchiSteamFarm
 	cd /tmp
 	echo "正在下载ArchiSteamFarm，请耐心等待。。。。。。"
-	wget https://github.com/JustArchiNET/ArchiSteamFarm/releases/download/3.4.1.7/ASF-linux-x64.zip -O ASF-linux-x64.zip
+	wget https://github.com/JustArchiNET/ArchiSteamFarm/releases/download/3.4.2.2/ASF-linux-x64.zip -O ASF-linux-x64.zip
 	echo "正在解压ArchiSteamFarm，请耐心等待。。。。。。"
 	unzip ASF-linux-x64.zip -d /usr/bin/ArchiSteamFarm/
 	rm -f /tmp/ASF-linux-x64.zip
@@ -114,6 +200,8 @@ installArchiSteamFarm(){
 	else
 		dialog --title "ASF-Install-Shell挂卡脚本" --msgbox "ArchiSteamFarm安装完成！" 10 60
 	fi 
+	
+	cd /root
 }
 
 enterSteamID(){
@@ -415,7 +503,28 @@ mainMenu(){
 	rm -f /tmp/asf.mode
 }
 
-initScript
-while :; do
-	mainMenu
-done
+helpMess(){
+	echo "./asf.sh [-c config] [-d download] [-e edit] [-h help] [-s start] [-u uninstall]"
+    echo "  -c, --config          配置挂卡用户Bot.json"
+    echo "  -d, --download        下载ArchiSteamFarm"
+	echo "  -e, --edit            编辑Bot.json"
+    echo "  -h, --help            显示提示信息"
+    echo "  -s, --start           开始挂卡"
+    echo "  -u, --uninstall       卸载ArchiSteamFarm"
+}
+
+main(){
+	initScript
+	[[ "$CONFIG" == "1" ]] && configArchiSteamFarm && return
+	[[ "$DOWNLOAD" == "1" ]] && installArchiSteamFarm && return
+	[[ "$EDIT" == "1" ]] && vim /usr/bin/ArchiSteamFarm/config/Bot.json/ && return
+	[[ "$START" == "1" ]] && runArchiSteamFarm && return
+	[[ "$UNINSTALL" == "1" ]] && uninstallArchiSteamFarm && return
+	[[ "$HELP" == "1" ]] && helpMess && return
+	
+	while :; do
+		mainMenu
+	done
+}
+
+main
