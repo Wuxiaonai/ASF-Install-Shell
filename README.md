@@ -75,7 +75,7 @@ screen -U -S ASF
 
 ## 贡献
 
-可以随时新建一个Pull request 或者 issues 写下你的想法^_^
+可以随时新建一个Pull request 或者 issues 写下你的想法^_^  
 请先阅读[参与者公约](https://www.contributor-covenant.org/zh-cn/version/1/4/code-of-conduct)  
 
 ## 维护
