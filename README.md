@@ -8,24 +8,8 @@
 
 ![](Logo.png)
 
-## 平台支持  
+[TOC]
 
-Asf_Install_Shell在以下平台中可用：  
-   * Ubuntu  
-      * Ubuntu 14.04  
-	  * Ubuntu 16.04  
-	  * Ubuntu 18.04  
-   * Debian  
-      * Debian 8  
-	  * Debian 9  
-   * Raspbian  
-      * Raspbian 8
-	  * Raspbian 9
-   * CentOS
-      * CentOS 6
-	  * CentOS 7
-   * Fedora
-      * Fedora 27
 ## 下载安装
 
 使用前需要先安装dialog和screen  
@@ -55,6 +39,26 @@ screen -U -S ASF
 ## 使用示例
 
 有关更多示例和用法, 请参阅[wiki](https://github.com/Kiyotaka233/ASF-Install-Shell/wiki)。
+
+## 平台支持  
+
+Asf_Install_Shell在以下平台中可用：  
+
+- Ubuntu  
+  - Ubuntu 14.04  
+    - Ubuntu 16.04  
+    - Ubuntu 18.04  
+- Debian  
+  - Debian 8  
+    - Debian 9  
+- Raspbian  
+  - Raspbian 8
+    - Raspbian 9
+- CentOS
+  - CentOS 6
+    - CentOS 7
+- Fedora
+  - Fedora 27
 
 ## 更新日志
 
