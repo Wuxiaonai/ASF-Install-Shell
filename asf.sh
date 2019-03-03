@@ -152,11 +152,6 @@ chooseSystem(){
 }
 
 installArchiSteamFarmInit(){
-    #设置DNS
-	echo "正在设置DNS"
-	echo -e "nameserver 1.1.1.1" > /etc/resolv.conf
-	echo -e "nameserver 9.9.9.9" >> /etc/resolv.conf
-
 	#系统更新
 	chooseSystem
 	echo "正在运行系统更新"
