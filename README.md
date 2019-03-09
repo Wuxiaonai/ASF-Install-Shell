@@ -8,7 +8,21 @@
 
 ![](Logo.png)
 
-[TOC]
+<!-- TOC -->
+
+- [Asf_Install_Shell](#asf_install_shell)
+    - [下载安装](#下载安装)
+        - [CentOS](#centos)
+        - [Ubuntu / Debian](#ubuntu--debian)
+        - [下载、运行脚本](#下载运行脚本)
+    - [使用示例](#使用示例)
+    - [平台支持](#平台支持)
+    - [更新日志](#更新日志)
+    - [贡献](#贡献)
+    - [维护](#维护)
+    - [许可证](#许可证)
+
+<!-- /TOC -->
 
 ## 下载安装
 
